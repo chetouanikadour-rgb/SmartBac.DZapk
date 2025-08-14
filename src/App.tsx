@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Download, BookOpen, Smartphone, Bot, Calendar, Video, FileText, Target, Users, TrendingUp, Shield, Menu, X, Sparkles, Brain, BookMarked, GraduationCap } from 'lucide-react';
+import { Download, BookOpen, Menu, X, Sparkles, Shield, Users, TrendingUp, Smartphone, Bot, FileText, Video, Brain, BookMarked, Calendar, Target, GraduationCap } from 'lucide-react';
+import './optimized.css';
 
 function App() {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -14,24 +15,45 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleDownloadAPK = useCallback(() => {
+  const handleDownloadAPK = useCallback(async () => {
     setIsDownloading(true);
     
     try {
+      // Prefetch the APK file
+      const response = await fetch('/SmartBacDz.v1.apk', {
+        method: 'HEAD',
+        cache: 'force-cache'
+      });
+      
+      if (!response.ok) throw new Error('Failed to fetch APK');
+      
       // Create a temporary anchor element
       const link = document.createElement('a');
-      link.href = '/SmartBacDz.v1.apk';
+      link.href = response.url;
       link.download = 'SmartBacDz.v1.apk';
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
       
-      // Trigger the download
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      // Use requestIdleCallback for better performance
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(() => {
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
+      } else {
+        // Fallback for browsers that don't support requestIdleCallback
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
       
-      // Reset loading state
-      setTimeout(() => setIsDownloading(false), 2000);
+      // Reset loading state with debounce
+      const timer = setTimeout(() => {
+        setIsDownloading(false);
+      }, 2000);
+      
+      return () => clearTimeout(timer);
     } catch (error) {
       console.error('Download error:', error);
       setIsDownloading(false);
@@ -41,18 +63,41 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900" dir="rtl">
-      {/* Header */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-black/80 backdrop-blur-xl border-b border-white/10 shadow-2xl' 
-          : 'bg-transparent'
-      }`}>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 optimize-scrolling" dir="rtl">
+      {/* Optimized Header */}
+      <header 
+        className={`fixed top-0 left-0 right-0 z-50 transition-optimized ${
+          isScrolled 
+            ? 'bg-black/80 backdrop-blur-xl border-b border-white/10 shadow-2xl' 
+            : 'bg-transparent'
+        }`}
+        style={{
+          willChange: 'transform',
+          transform: 'translateZ(0)',
+          backfaceVisibility: 'hidden',
+          perspective: '1000px'
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 md:h-20">
             {/* Logo */}
             <div className="flex items-center space-x-reverse space-x-3 md:space-x-4">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/25 animate-pulse">
+              <img 
+                src="/og-image.png" 
+                alt="SmartBacDz Logo"
+                width="48"
+                height="48"
+                className="w-10 h-10 md:w-12 md:h-12 rounded-2xl shadow-lg shadow-purple-500/25 object-cover animate-optimized"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+                onError={(e) => {
+                  // Fallback to icon if image fails to load
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.nextElementSibling.style.display = 'flex';
+                }}
+              />
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 rounded-2xl items-center justify-center shadow-lg shadow-purple-500/25 animate-pulse hidden">
                 <BookOpen className="w-5 h-5 md:w-7 md:h-7 text-white" />
               </div>
               <div>
@@ -142,7 +187,7 @@ function App() {
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 md:mb-8 leading-tight">
               <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-pulse">SmartBacDz</span>
               <br />
-              <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-300">تطبيق الباكالوريا الثوري</span>
+              <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-300">تطبيق الباكالوريا الذكي</span>
             </h1>
             
             {/* Description */}
@@ -355,7 +400,7 @@ function App() {
       {/* Download Section */}
       <section id="download" className="py-16 md:py-24 relative">
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10"></div>
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <main className="pt-24 md:pt-28 pb-12 md:pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden optimize-scrolling" style={{ contentVisibility: 'auto' }}>
           <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-2xl rounded-2xl md:rounded-[3rem] p-8 md:p-16 border border-gray-700/50 shadow-2xl shadow-purple-500/25">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 md:mb-8">
               <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
