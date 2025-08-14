@@ -1,0 +1,74 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#581c87;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="10" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  
+  <!-- Animated background circles -->
+  <circle cx="200" cy="150" r="100" fill="url(#logoGradient)" opacity="0.1" filter="url(#glow)">
+    <animate attributeName="r" values="100;120;100" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="1000" cy="480" r="80" fill="url(#logoGradient)" opacity="0.1" filter="url(#glow)">
+    <animate attributeName="r" values="80;100;80" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="900" cy="150" r="60" fill="url(#logoGradient)" opacity="0.1" filter="url(#glow)">
+    <animate attributeName="r" values="60;80;60" dur="5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Main logo container -->
+  <g transform="translate(600,315)">
+    <!-- Logo background circle -->
+    <circle cx="0" cy="0" r="120" fill="url(#logoGradient)" filter="url(#glow)"/>
+    
+    <!-- Book icon -->
+    <g transform="translate(-40,-50)">
+      <path d="M20 10C20 4.47715 15.5228 0 10 0C4.47715 0 0 4.47715 0 10V70C0 75.5228 4.47715 80 10 80H70C75.5228 80 80 75.5228 80 70V10C80 4.47715 75.5228 0 70 0H20Z" fill="white"/>
+      <path d="M20 10H70V70H10C4.47715 70 0 65.5228 0 60V10H20Z" fill="rgba(255,255,255,0.1)"/>
+      <path d="M25 20H65V25H25V20Z" fill="url(#logoGradient)"/>
+      <path d="M25 30H55V35H25V30Z" fill="url(#logoGradient)"/>
+      <path d="M25 40H60V45H25V40Z" fill="url(#logoGradient)"/>
+      <path d="M25 50H50V55H25V50Z" fill="url(#logoGradient)"/>
+      <path d="M25 60H65V65H25V60Z" fill="url(#logoGradient)"/>
+    </g>
+  </g>
+  
+  <!-- Title text -->
+  <text x="600" y="500" text-anchor="middle" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white">
+    SmartBacDz APK
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="600" y="550" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" fill="#94a3b8">
+    تطبيق الباكالوريا الذكي
+  </text>
+  
+  <!-- Features -->
+  <g transform="translate(600,580)">
+    <circle cx="-100" cy="0" r="4" fill="#06b6d4"/>
+    <text x="-90" y="5" font-family="Arial, sans-serif" font-size="16" fill="#94a3b8">ذكاء اصطناعي</text>
+    
+    <circle cx="0" cy="0" r="4" fill="#8b5cf6"/>
+    <text x="10" y="5" font-family="Arial, sans-serif" font-size="16" fill="#94a3b8">أرشيف شامل</text>
+    
+    <circle cx="100" cy="0" r="4" fill="#ec4899"/>
+    <text x="110" y="5" font-family="Arial, sans-serif" font-size="16" fill="#94a3b8">فيديوهات HD</text>
+  </g>
+</svg>
