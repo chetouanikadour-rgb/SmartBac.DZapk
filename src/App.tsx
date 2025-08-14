@@ -1,5 +1,5 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
-import { Download, BookOpen, Star, Smartphone, Bot, Calendar, Video, FileText, Award, MessageCircle, Zap, Target, Users, TrendingUp, Shield, Menu, X, Sparkles, Brain, BookMarked, GraduationCap } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+import { Download, BookOpen, Smartphone, Bot, Calendar, Video, FileText, Target, Users, TrendingUp, Shield, Menu, X, Sparkles, Brain, BookMarked, GraduationCap } from 'lucide-react';
 
 function App() {
   const [isDownloading, setIsDownloading] = useState(false);
