@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Download, BookOpen, Star, Smartphone, Bot, Calendar, Video, FileText, Award, MessageCircle, Zap, Target, Play, Users, TrendingUp, Shield, Menu, X, ChevronDown, CheckCircle, Sparkles, Rocket, Brain, BookMarked, GraduationCap } from 'lucide-react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
+import { Download, BookOpen, Star, Smartphone, Bot, Calendar, Video, FileText, Award, MessageCircle, Zap, Target, Users, TrendingUp, Shield, Menu, X, Sparkles, Brain, BookMarked, GraduationCap } from 'lucide-react';
 
 function App() {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -14,7 +14,7 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleDownloadAPK = () => {
+  const handleDownloadAPK = useCallback(() => {
     setIsDownloading(true);
     
     try {
@@ -38,7 +38,7 @@ function App() {
       // Fallback: open in new tab
       window.open('/SmartBacDz.v1.apk', '_blank');
     }
-  };
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900" dir="rtl">
@@ -151,12 +151,12 @@ function App() {
               <span className="text-cyan-400 font-bold"> كل ما تحتاجه للنجاح</span> في مكان واحد
             </p>
             
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center mb-8 md:mb-12 px-4">
+            {/* Action Button */}
+            <div className="flex justify-center items-center mb-8 md:mb-12 px-4">
               <button 
                 onClick={handleDownloadAPK}
                 disabled={isDownloading}
-                className="group relative bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 text-white px-8 md:px-10 py-4 md:py-5 rounded-2xl font-bold text-lg md:text-xl shadow-2xl shadow-purple-500/25 hover:shadow-cyan-500/25 transform hover:-translate-y-1 hover:scale-105 transition-all duration-300 flex items-center disabled:opacity-70 disabled:cursor-not-allowed overflow-hidden w-full sm:w-auto justify-center"
+                className="group relative bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 text-white px-12 md:px-16 py-4 md:py-6 rounded-2xl font-bold text-lg md:text-xl shadow-2xl shadow-purple-500/25 hover:shadow-cyan-500/25 transform hover:-translate-y-1 hover:scale-105 transition-all duration-300 flex items-center disabled:opacity-70 disabled:cursor-not-allowed overflow-hidden w-full sm:w-auto justify-center max-w-sm"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="relative flex items-center">
@@ -172,11 +172,6 @@ function App() {
                     </>
                   )}
                 </div>
-              </button>
-              
-              <button className="group border-2 border-cyan-400/50 text-cyan-300 px-8 md:px-10 py-4 md:py-5 rounded-2xl font-bold text-lg md:text-xl hover:bg-cyan-400/10 hover:border-cyan-400 transition-all duration-300 flex items-center backdrop-blur-xl w-full sm:w-auto justify-center">
-                <Play className="w-5 h-5 md:w-6 md:h-6 ml-3 group-hover:scale-110 transition-transform" />
-                شاهد العرض التوضيحي
               </button>
             </div>
             
@@ -372,11 +367,11 @@ function App() {
               <span className="text-cyan-400 font-bold"> التحميل مجاني بالكامل</span>
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 md:gap-8 justify-center items-center mb-8 md:mb-12 px-4">
+            <div className="flex justify-center items-center mb-8 md:mb-12 px-4">
               <button 
                 onClick={handleDownloadAPK}
                 disabled={isDownloading}
-                className="group relative bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 text-white px-8 md:px-12 py-4 md:py-6 rounded-2xl font-black text-lg md:text-xl shadow-2xl shadow-purple-500/25 hover:shadow-cyan-500/25 transform hover:-translate-y-1 hover:scale-105 transition-all duration-300 flex items-center disabled:opacity-70 disabled:cursor-not-allowed overflow-hidden w-full sm:w-auto justify-center"
+                className="group relative bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 text-white px-12 md:px-16 py-4 md:py-6 rounded-2xl font-black text-lg md:text-xl shadow-2xl shadow-purple-500/25 hover:shadow-cyan-500/25 transform hover:-translate-y-1 hover:scale-105 transition-all duration-300 flex items-center disabled:opacity-70 disabled:cursor-not-allowed overflow-hidden w-full sm:w-auto justify-center max-w-sm"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="relative flex items-center">
@@ -393,11 +388,6 @@ function App() {
                     </>
                   )}
                 </div>
-              </button>
-              
-              <button className="group border-2 border-cyan-400/50 text-cyan-300 px-8 md:px-12 py-4 md:py-6 rounded-2xl font-bold text-lg md:text-xl hover:bg-cyan-400/10 hover:border-cyan-400 transition-all duration-300 flex items-center backdrop-blur-xl w-full sm:w-auto justify-center">
-                <Play className="w-5 h-5 md:w-7 md:h-7 ml-3 md:ml-4 group-hover:scale-110 transition-transform" />
-                مشاهدة العرض التوضيحي
               </button>
             </div>
             
